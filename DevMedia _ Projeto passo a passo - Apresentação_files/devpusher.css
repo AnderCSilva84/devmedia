@@ -1,0 +1,28 @@
+@keyframes nc_remove {0% {filter: contrast(1) brightness(1) drop-shadow(0px 0px 0px transparent) blur(0px);} 50%,100% {filter: contrast(0) brightness(5) drop-shadow(0px 0px 2px white) blur(2px);} 60% {opacity: 1;max-height: 100%;} 100% {opacity: 0;max-height: 0%;}}
+@keyframes nc_show {0% {opacity: 0;left: calc(100% + 10px);} 40%, 100% {opacity: 1;} 65%,100% {left: 0;}}
+.notificacao-list { position: fixed; height: 100vh; width: 300px; max-width: 100vw; bottom: 0; right: 0; z-index: 100; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; padding: 0 10px 10px 0; box-sizing: border-box;}
+.notificacao-item { width: 100%; box-sizing: border-box; pointer-events: auto; cursor: default; filter: drop-shadow(1px 2px 4px rgba(0 0 0 / 40%)); transition: all .4s linear; height: 0; display: flex; align-items: center; justify-content: flex-end;}
+.notificacao-item.remove { animation: nc_remove .8s linear both;}
+.notificacao-item .notificacao-container {width: 100%;box-sizing: border-box;background: #253a44;border-radius: 50px 50px;color: white;font-family: 'Montserrat', sans-serif;display: flex;gap: 10px;align-items: center;font-size: 14px;font-weight: 400;transition: all .4s linear;opacity: 0;position: relative;padding: 0;}
+.notificacao-item .notificacao-close {border: 1px solid white;flex: 0 0 auto;height: 20px;width: 20px;border-radius: 100%;position: absolute;align-self: flex-start;cursor: pointer;background-color: #ff1d15b5;display: flex;align-items: center;justify-content: center;z-index: 1;opacity: 0;right: 0;top: -5px;transition: opacity .2s linear;}
+.notificacao-item .notificacao-content {flex: 1 1 auto;padding: 0;line-height: 1.3em;}
+.notificacao-item .notificacao-content .destaque { font-weight: 600; color: #35b4fb;}
+.notificacao-item .notificacao-close:after, .notificacao-item .notificacao-close:before { content: ""; position: absolute; height: 10px; width: 2px; background-color: #ffffff; transform: rotate(-45deg);}
+.notificacao-item .notificacao-close:before { transform: rotate(45deg);}
+.notificacao-item .notificacao-content a {font-weight: 600;color: white;text-decoration: none;filter: contrast(0) brightness(5) drop-shadow(0px 0px 2px white) blur(2px) opacity(0);display: flex;gap: 5px;padding-right: 0px;align-items: center;justify-content: center;}
+.notificacao-item .notificacao-usuario-foto { display: flex; height: 50px; width: 50px; flex: 0 0 auto; margin-right: 10px;}
+.notificacao-item .notificacao-usuario-foto img {height: 100%;width: 100%;border-radius: 50%;filter: drop-shadow(2px 0px 2px #35b4fb);object-fit: cover;}
+.notificacao-item .notificacao-mensagem { flex: 1 1 auto;}
+.notificacao-item .notificacao-container.show { animation: nc_show .3s linear both;}
+.notificacao-item .notificacao-container.show .notificacao-content a { transition: all .6s .2s ease; filter: contrast(1) brightness(1) drop-shadow(0px 0px 0px transparent) blur(0px) opacity(1);}
+.notificacao-item:hover .notificacao-close { opacity: 1;}
+.notificacao-item.chama .notificacao-container {background: linear-gradient(45deg, #f10000, #f78900c2);}
+.notificacao-item.chama .notificacao-content .destaque { color: #ffba08;}
+.notificacao-item.chama .notificacao-usuario-foto img {filter: drop-shadow(2px 0px 2px gold);}
+.notificacao-item .notificacao-usuario-chama { flex: 0 0 auto; background-image: url(//www.devmedia.com.br/tecnologia/img/icon-chama-simples.svg); background-repeat: no-repeat; background-size: 100%; background-position: center; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; color: red; padding-top: 7%; box-sizing: border-box; align-self: center; font-size: 12px; font-weight: 700; transform: scale(0.85);}
+.notificacao-item.temporada .notificacao-container {background: linear-gradient(45deg, #053ea5, #8100f7c2);}
+.notificacao-item .notificacao-usuario-temporada { flex: 0 0 auto; background-image: url(//www.devmedia.com.br/tecnologia/img/icon-temporada.svg); background-repeat: no-repeat; background-size: 76%; background-position: center; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; color: rgb(255 215 0 / 58%); box-sizing: border-box; align-self: center; font-size: 12px; font-weight: 700; transform: scale(0.85);}
+.notificacao-item.projeto .notificacao-container { background: linear-gradient(45deg, #06357f, #3395d5c2);}
+.notificacao-item.projeto .notificacao-usuario-foto img { filter: drop-shadow(2px 0px 2px white);}
+.notificacao-item.projeto .notificacao-content .destaque { color: lightblue;}
+.notificacao-item .notificacao-usuario-projeto { flex: 0 0 auto; background-image: url(//www.devmedia.com.br/tecnologia/img/icon-computador-projeto.svg); background-repeat: no-repeat; background-size: 100%; background-position: center; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; align-self: center; font-size: 12px; font-weight: 700; transform: scale(0.85); margin-right: 8px;}

@@ -1,0 +1,334 @@
+let controllerQuest = "https://www.devmedia.com.br/inc/quest/controller/quest_controller.php";
+let carregandoAjax = false;
+
+function carregaCodes(){
+    var codeLength =  $(".line-numbers code, .no-line-numbers code").length;
+    if($(".line-numbers, .no-line-numbers").length > 0){
+       $(".line-numbers code, .no-line-numbers code").each(function(i, e){
+          Prism.highlightElement(e, false, function(){});  
+       });
+    }
+ }
+
+ function ajustarLarguraValores(){
+    var elementos = document.getElementsByClassName("quest-requisito-status");
+
+    for (let i = 0; i < elementos.length; i++) {
+        elementos[i].style.width = "";
+    }
+
+    var maiorElementoLargura = 0;
+
+    for (let i = 0; i < elementos.length; i++) {
+        let larguraElemento = elementos[i].offsetWidth;
+
+        if(maiorElementoLargura < larguraElemento){
+            maiorElementoLargura = larguraElemento;
+        }
+    }
+
+    for (let i = 0; i < elementos.length; i++) {
+        elementos[i].style.width = (maiorElementoLargura + 5) + "px";
+    }
+}
+
+function ajustarVerProjeto(){
+    let area = $(".tecnologia-quest-descricao.hidden");
+
+    if(area.length > 0){
+        let primeiroSlide = area.find(".theme-default").first();
+    
+        let topArea = area.offset().top;
+        let bottomArea = primeiroSlide.offset().top + primeiroSlide.height();
+    
+        let tamanhoFinal = bottomArea - topArea + 70;
+    
+        area.css("max-height", tamanhoFinal+"px");
+    }
+}
+
+function limparAjusteVerProjeto(){
+    $(".tecnologia-quest-descricao.hidden").css("max-height","");
+}
+
+
+ $(document).ready(function(){
+    devbot.setMessage = function setMessage(msg){
+        $(".devbot-dialog").html(msg);
+        $(".devbot-dialog").removeClass("dialog-hidden");
+    }
+
+     carregaCodes();
+
+     var modalCloseBtn = $(".modal-quest-close");
+    if(modalCloseBtn.length > 0){
+        $(".devbot-wrapper").append(modalCloseBtn);
+    }
+
+    $("body").on("click", ".modal-quest.active, .modal-quest.active .modal-quest-close", function(){
+        $(".modal-quest").removeClass("active");
+    });
+
+     $("body").on("click", ".tecnologia-menu-wrapper .tecnologia-link", function(e){
+        if(window.innerWidth < 1024){
+            e.preventDefault();
+            
+            $(".tecnologia-menu-wrapper").toggleClass("open");
+            return false;
+        }
+    });
+
+    $("body").on("click", ".conteudo-block.fechado", function(e){
+        devbot.setMessage("Espere um momento.<br> Para acessar essa passo do projeto, você precisa concluir o passo anterior.");
+        $(".modal-quest").addClass("active");
+    });
+
+    $("body").on("click", ".conteudo-block.bloqueado", function(e){
+        var id_etapa = $(this).data("id");
+
+        devbot.setMessage("Você deseja desbloquear e acessar esse passo do projeto?<br><br><span data-id='"+id_etapa+"' class='btn-desbloquear'>Sim, quero desbloquear!</span>");
+        $(".modal-quest").addClass("active");
+    });
+
+    $("body").on("click", ".tecnologia-quest-descricao.hidden .descricao-ver-mais", function(e){
+        limparAjusteVerProjeto();
+        $(".tecnologia-quest-descricao.hidden").removeClass("hidden");
+    });
+
+
+    $("body").on("click", ".btn-desbloquear", function(e){
+        if(carregandoAjax){
+            return false;
+        }
+
+        carregandoAjax = true;
+
+        let id = $(this).data("id");
+
+        let dados = {
+            funcao : "desbloquearQuestEtapa",
+            id : id
+        };
+
+        $.ajax({
+            url:controllerQuest,
+            data:dados,
+            method:"POST",
+            success: function(res){
+                if(res.status){
+                    window.location = res.url;
+                    $(".modal-quest").removeClass("active");
+                }else{
+                    devbot.setHumor(DevbotHumor.sad);
+                    devbot.setMessage(res.msg);
+                    $(".modal-quest").addClass("active");
+                }
+
+            },
+            error: function(res){
+                devbot.setHumor(DevbotHumor.sad);
+                devbot.setMessage("Ops...<br>Ocorreu um erro :(");
+                $(".modal-quest").addClass("active");
+                console.error(res);
+            },
+            complete: function(res){
+                carregandoAjax = false;
+            }
+        })
+    });
+
+
+
+    $("body").on("click", ".quest-btn.concluir", function(e){
+        if(carregandoAjax){
+            return false;
+        }
+
+        carregandoAjax = true;
+
+        let id = $(this).data("id");
+
+        let dados = {
+            funcao : "concluirQuestEtapa",
+            id : id
+        };
+
+        $.ajax({
+            url:controllerQuest,
+            data:dados,
+            method:"POST",
+            success: function(res){
+                if(res.status){
+                    devbot.setHumor(DevbotHumor.default);
+                    devbot.setMessage(res.msg);
+                    
+                }else{
+                    $('html, body').animate({
+                        scrollTop: $(".tecnologia-quest-requisitos").offset().top - 150
+                    }, 400);
+
+                    devbot.setHumor(DevbotHumor.sad);
+                    devbot.setMessage(res.msg);
+                }
+
+                $(".modal-quest").addClass("active");
+
+            },
+            error: function(res){
+                devbot.setHumor(DevbotHumor.sad);
+                devbot.setMessage("Ops...<br>Ocorreu um erro :(");
+                $(".modal-quest").addClass("active");
+                console.error(res);
+            },
+            complete: function(res){
+                carregandoAjax = false;
+            }
+        })
+    });
+
+    $("body").on("click", ".quest-btn.comparar", function(e){
+        if(carregandoAjax){
+            return false;
+        }
+
+        carregandoAjax = true;
+
+        let id = $(this).data("id");
+
+        let dados = {
+            funcao : "obterLinkCompararCodigo",
+            id : id
+        };
+
+        $.ajax({
+            url:controllerQuest,
+            data:dados,
+            method:"POST",
+            success: function(res){
+                if(res.status){
+                    window.open(res.msg, "_blank");
+                    
+                }else{
+                    $('html, body').animate({
+                        scrollTop: $(".tecnologia-quest-requisitos").offset().top - 150
+                    }, 400);
+
+                    devbot.setHumor(DevbotHumor.sad);
+                    devbot.setMessage(res.msg);
+                    $(".modal-quest").addClass("active");
+                }
+            },
+            error: function(res){
+                devbot.setHumor(DevbotHumor.sad);
+                devbot.setMessage("Opss... :(<br>Ocorreu um erro");
+                $(".modal-quest").addClass("active");
+                console.error(res);
+            },
+            complete: function(res){
+                carregandoAjax = false;
+            }
+        });
+    });
+
+    $("body").on("click", ".quest-btn.duvida", function(e){
+        var btn = $(this);
+        if(!btn[0].carregado){
+            if(carregandoAjax){
+                return false;
+            }
+            carregandoAjax = true;
+    
+            let id = $(this).data("id");
+    
+            let dados = {
+                funcao : "liberarComentarios",
+                id : id
+            };
+    
+            $.ajax({
+                url:controllerQuest,
+                data:dados,
+                method:"POST",
+                success: function(res){
+                    if(res.status){
+                        btn[0].carregado = true;
+                        $("#comentario")[0].isbloqued = false;
+                        loadComentarios();
+                        $(".comentario-containter").slideDown();
+
+                        $('html, body').animate({
+                            scrollTop: $(".comentario-containter").offset().top + 50
+                        }, 400);
+
+                    }else{
+                        $('html, body').animate({
+                            scrollTop: $(".tecnologia-quest-requisitos").offset().top - 150
+                        }, 400);
+                        
+                        devbot.setHumor(DevbotHumor.sad);
+                        devbot.setMessage(res.msg);
+                        $(".modal-quest").addClass("active");
+                    }
+                },
+                error: function(res){
+                    devbot.setHumor(DevbotHumor.sad);
+                    devbot.setMessage("Opss... :(<br>Ocorreu um erro");
+                    $(".modal-quest").addClass("active");
+                    console.error(res);
+                },
+                complete: function(res){
+                    carregandoAjax = false;
+                }
+            });
+        }else{
+            $(".comentario-containter").slideToggle();
+
+            if(!$(".comentario-containter").is(":hidden")){
+                $('html, body').animate({
+                    scrollTop: $(".comentario-containter").offset().top + 50
+                }, 400);
+            }
+        }
+
+    });
+    
+    if(typeof questExibirComentario != 'undefined' && questExibirComentario == true){
+        $(".comentario-containter").slideDown();
+    }
+
+    var devslider;
+	if($("#devslider").length > 0){
+		function runSlider() {	
+			var sliderTags = $.find("[id='slide-comp']");
+			$(sliderTags).each(function(i,e){
+				$(e).addClass("slider-box");
+			});
+			
+			devslider = new DevSlider(".slider-box");
+
+            ajustarVerProjeto();
+		}
+
+		if(typeof DevSlider == "undefined"){	
+			$("#devslider")[0].onload = runSlider;
+		}else{	
+			runSlider();
+		}
+	}
+
+    if (typeof mCustomScrollbar != "undefined" && $(".tecnologia-usuarios-cards").length > 0) {
+        $(".tecnologia-usuarios-cards").mCustomScrollbar({
+            theme: "dark",
+            scrollInertia: 0,
+            axis: "x"
+        });
+    }
+
+    if($(".tecnologia-quest-descricao.hidden").length > 0){
+        $(window).resize(function(){
+            ajustarVerProjeto();
+        })
+    }
+
+    ajustarLarguraValores();
+ });

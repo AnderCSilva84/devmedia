@@ -1,0 +1,332 @@
+.tecnologia-menu-inscrever {
+    background-color: #1F4F66;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.16);
+    padding: 20px;
+    font-family: montserrat, sans-serif;
+    margin-bottom: 25px;
+}
+
+.tecnologia-menu-objetivo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #F8FAFB;
+}
+
+.tecnologia-menu-objetivo-label {
+    color: #9A9A9A;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.tecnologia-menu-inscrever hr {
+    border: 1px solid #F8F8F8;
+    margin: 15px 0;
+}
+
+.tecnologia-menu-objetivo-valor {
+    font-size: 18px;
+    font-weight: 600;
+    color: #00C4D4;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.tecnologia-menu-objetivo-info {
+    font-size: 14px;
+    color: #1F4F66;
+    font-weight: 500;
+}
+
+.tecnologia-menu-progress {
+    margin: 10px 0;
+    height: 7px;
+    background: #DFE9E9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tecnologia-menu-progress-bar {
+    background: transparent linear-gradient(270deg, #0AC2D1 0%, #3198C2 100%) 0% 0% no-repeat padding-box;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.tecnologia-menu-svg {display: flex;height: 70px;width: 70px;opacity: 0.5;margin-right: 10px;}
+.tecnologia-menu-svg svg {height: 95%;width: auto;transform: translate(1.5px, 0px) scale(1.1);}
+.tecnologia-menu-svg svg .rect-number-badge, .tecnologia-menu-svg svg .text-number-badge {display: none;}
+.tecnologia-menu-svg.p-0 {filter: grayscale(1);}
+.tecnologia-menu-svg.p-100 {opacity: 1;}
+.btn-menu-inscrever {background: #0AC2D1;display: block;padding: 14px 20px;border-radius: 8px;font-size: 16px;margin: auto;color: white;font-weight: 500;cursor:default;transition: all .2s ease;text-align: center;}
+.btn-menu-inscrever.inscrito { border: 1px solid #0bc1d1; color: inherit; background: white; cursor: default;}
+.btn-menu-inscrever:not(.no-btn):hover { background: #575757; cursor: pointer;}
+a.btn-menu-inscrever {/* font-size: 14px; */text-decoration: none;}
+a.btn-menu-inscrever:hover {cursor: pointer;background-color: #575757;}
+span.btn-menu-inscrever.no-btn {
+    background: #1C485D;
+}
+
+.tecnologia-menu-objetivo-progresso {
+    width: 100%;
+}
+
+.tecnologia-menu-vagas {
+    margin-bottom: 15px;
+}
+
+.tecnologia-menu-vagas a {
+    display: flex;
+    padding: 15px;
+    background-color: #235b75;
+    color: #F8FAFB;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.tecnologia-menu-vagas a .tecnologia-menu-vagas-numero {
+    min-width: 45px;
+    align-items: center;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    background-color: #286784;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #0AC2D1;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.tecnologia-menu-vagas a .slide-next {
+    height: 15px;
+    stroke: currentColor;
+    fill: transparent;
+    display: block;
+    flex: 0 0 auto;
+    width: 15px;
+    margin-left: auto;
+}
+
+.tecnologia-menu-info {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #235B75;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+.tecnologia-menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: white;
+}
+
+.tecnologia-menu-valor {
+    min-width: 45px;
+    align-items: center;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    background-color: #286784;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #0AC2D1;
+    font-weight: 600;
+    margin-right: 8px;
+    padding: 0 5px;
+    flex: 0 0 auto;
+}
+
+.tecnologia-menu-label {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.tecnologia-menu-item .tecnologia-menu-label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0;
+    text-align: left;
+}
+
+.tecnologia-menu-info.progresso .tecnologia-menu-valor{
+    background-color: transparent;
+}
+
+.tecnologia-menu-item:last-child {
+    margin-bottom: 0;
+}
+
+.tecnologia-menu-icon {
+    padding: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 50px;
+    height: 50px;
+}
+
+.tecnologia-menu-icon svg {
+    height: 100%;
+    width: auto;
+}
+
+.tecnologia-menu-icon svg #Borda {
+    fill: white;
+}
+
+.tecnologia-menu-icon svg .rect-number-badge {
+    display: none;
+}
+
+.tecnologia-menu-icon svg .text-number-badge {
+    display: none;
+}
+
+.tecnologia-menu-info.medalha {
+    background-color: transparent;
+    padding: 0;
+    flex-direction: row;
+    justify-content: unset;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.tecnologia-menu-info.medalha .tecnologia-menu-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.tecnologia-medalhas-wrapper {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    background-color: #235b75;
+    border-radius: 10px;
+}
+
+
+.tecnologia-certificado-medalhas {
+    margin-left: 10px;
+    flex: 0 0 auto;
+}
+
+.tecnologia-menu-certificado {
+    margin: 0;
+    padding: 10px;
+    justify-content: center;
+    background-color: #235b75;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all .4s ease;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    align-items: center;
+    text-decoration: none;
+}
+
+.tecnologia-menu-certificado-icon {
+    height: 30px;
+    width: 30px;
+    margin: 0 0 5px 0px;
+    color: #03c4d4;
+}
+
+.tecnologia-menu-certificado-icon svg .line {
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+}
+
+.tecnologia-menu-certificado-icon svg .line.lines-border {
+    fill: white;
+}
+
+.tecnologia-medalhas-wrapper .tecnologia-menu-label {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+
+.tecnologia-menu-certificado:hover {
+    color: white;
+    background-color: #286784;
+}
+
+.tecnologia-menu-item .slide-next {
+    height: 25px;
+    stroke: white;
+    fill: transparent;
+    margin-left: 10px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+    stroke-width: 1.4px;
+    background-color: #ff8441;
+    width: 25px;
+    padding: 7px 6px 7px 8px;
+    border-radius: 5px;
+}
+
+a.tecnologia-menu-item .tecnologia-menu-label {
+    flex: 1 0 auto;
+    color: inherit;
+}
+
+a.tecnologia-menu-item:hover {
+    color: #0AC2D1;
+}
+
+
+@media(max-width: 1023px){
+
+}
+
+@media (max-width: 767px){
+}
+
+@media (max-width: 540px){
+    .tecnologia-menu-info.progresso .tecnologia-menu-valor {
+        font-size: 16px;
+    }
+
+    .tecnologia-menu-vagas a {
+        text-align: center;
+    }
+
+    .tecnologia-menu-info.medalha {
+        flex-direction: column;
+    }
+
+    .tecnologia-certificado-medalhas {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}

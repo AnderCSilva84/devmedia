@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'MontserratV';
+    src: url('https://www.devmedia.com.br/workspace/skins/fonts/Montserrat-V.ttf');
+}
+
+.card-usuario.card-alpes .card-background {
+    background: url("//www.devmedia.com.br/workspace/skins/cards/alpes/imagens/background.jpg?2");
+    z-index: 1;
+    background-size: 100% 100%;
+}
+
+.card-usuario.card-alpes .card-wrapper .card-foto {
+    height: 70%;
+    flex: 0 0 auto;
+    z-index: 1;
+    padding: 21.8% 10% 0%;
+}
+
+.card-usuario.card-alpes .card-wrapper {
+    flex-direction: column-reverse;
+}
+
+.card-usuario.card-alpes .card-wrapper .card-foto .usuario-foto {
+    margin: 0;
+    background: none;
+    border-radius: 50%;
+    background-color: #ff442b;
+    padding: 2%;
+}
+
+.card-usuario.card-alpes .card-wrapper .card-info {
+    flex: 1 1 auto;
+    width: 85%;
+    padding: 0% 2% 14%;
+    z-index: 2;
+    margin: auto;
+    box-sizing: border-box;
+    font-family: 'MontserratV', sans-serif;
+    gap: 5%;
+    color: #001621;
+}
+
+.card-usuario.card-alpes .card-wrapper .card-info .usuario-nome.sobrenome {
+    margin-top: -2%;
+}
+
+.card-usuario.card-alpes .card-wrapper .card-info .usuario-nome {
+    font-size: 18px;
+    stroke: #fff;
+    stroke-width: 0px;
+    fill: #fff;
+    filter: drop-shadow(2px 0px 1px CurrentColor) drop-shadow(0px 2px 0px CurrentColor) drop-shadow(-2px 0px 0px CurrentColor) drop-shadow(0px -2px 1px CurrentColor);
+    text-transform: uppercase;
+}
+
+.card-usuario.card-alpes .card-info-gami {
+    height: 33.5%;
+    width: 100%;
+    position: absolute;
+    bottom: 5%;
+    left: 3%;
+    filter: drop-shadow(1px 0px 1px CurrentColor) drop-shadow(0px 1px 0px CurrentColor) drop-shadow(-1px 0px 0px CurrentColor) drop-shadow(0px -1px 1px CurrentColor);
+}
+
+.card-usuario.card-alpes .card-info-gami .card-info-gami-group img {
+    height: 40%;
+}
+
+.card-usuario.card-alpes .card-info-gami .card-info-gami-group .usuario-value {
+    width: 80%;
+    fill: white;
+    stroke: white;
+    stroke-width: 0;
+    transform-origin: center center;
+    transform: scale(1.3) translate(6%, -1.5%);
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.card-usuario.card-alpes .card-info-gami .card-info-gami-group:nth-child(2) img {
+    height: 50%;
+}

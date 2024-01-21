@@ -1,0 +1,137 @@
+(async () => {
+    let conn = null;
+    const _script = document.currentScript;
+    const supportSharedWorker = typeof(window.SharedWorker) !== 'undefined';
+    let loadedCss = null;
+
+    const loadCss = () => {
+        let cssClass = "devpusher-css";
+        loadedCss = document.querySelector("."+cssClass);
+        if(loadedCss == null){
+            let url = "https://www.devmedia.com.br/push/css/devpusher.css";
+            let csp = _script.src.split("?")[1];
+            
+            if(typeof csp != "undefined"){
+                url += "?" + csp;
+            }
+
+            let cssLink = document.createElement("link");
+			cssLink.href = url;
+			cssLink.classList.add(cssClass);
+			cssLink.type = "text/css";
+			cssLink.rel = "stylesheet";
+            document.body.append(cssLink);
+
+            loadedCss = cssLink;
+        }
+    }
+
+    const startConnection = () => {
+        if(supportSharedWorker){
+            const sharedWorker = new SharedWorker('https://www.devmedia.com.br/push/js/devpusherWorker.js?5');
+            const workerPort = sharedWorker.port;
+
+            workerPort.onmessage = (event) => {
+                tratarMessage(event);
+            };
+            
+        }else{
+            conn = new WebSocket('wss://arquivo.devmedia.com.br/pusher');
+            
+            conn.onmessage = (e) => {
+                tratarMessage(message);
+            };
+        }
+
+    }
+
+    const tratarMessage = (message) => {
+        let dados = JSON.parse(message.data);
+    
+        if(typeof dados.notificacao != 'undefined'){
+            if(dados.notificacao.tipo == "update"){
+                if(loadedCss != null){
+                    loadedCss.href += dados.notificacao.msg;
+                }
+            }else{
+                showNotification(dados.notificacao);
+            }
+        }
+    }
+
+    const showNotification = (notification) => {
+        let list = createNotificaoList();
+        
+        let ni = document.createElement("div");
+        ni.classList.add("notificacao-item");
+        
+        let nic = document.createElement("div");
+        nic.classList.add("notificacao-container");
+    
+        let nicc = document.createElement("div");
+        nicc.classList.add("notificacao-content");
+    
+        let niclose = document.createElement("div");
+        niclose.classList.add("notificacao-close");
+    
+        nic.append(nicc);
+        ni.append(niclose);
+        ni.append(nic);
+    
+        let msg = notification.msg;
+        
+        var html = document.createElement("div");
+        html.innerHTML = msg;
+    
+        nicc.innerHTML = html.innerText;
+        ni.classList.add(notification.tipo);
+    
+        list.append(ni);
+    
+        ni.style.height = (nic.offsetHeight+5)+"px";
+        ni.style.paddingTop = "5px";
+    
+        setTimeout(() =>{
+            nic.classList.add("show");
+        }, 400);
+    
+        niclose.addEventListener("click", () => { closeNotificacaoItem(ni)})
+    
+        /* setTimeout(() => {
+            closeNotificacaoItem(ni);
+        }, 1000 * 60); */
+
+        closeOlderNotificacaoItem();
+    }
+
+    const closeOlderNotificacaoItem = () => {
+        let itens = document.querySelectorAll(".notificacao-list .notificacao-item:not(:last-child)");
+        itens.forEach(i => closeNotificacaoItem(i));
+    }
+
+    const closeNotificacaoItem = (item) => {
+        item.classList.add("remove");
+        setTimeout(() => {
+            item.remove();
+        }, 1000);
+    }
+    
+    const createNotificaoList = () => {
+        let list = document.querySelector(".notificacao-list");
+        if(list == null){
+            list = document.createElement("div");
+            list.classList.add("notificacao-list");
+            document.body.append(list);
+        }
+        return list;
+    }
+
+    window.addEventListener("load", () => {
+        loadCss();
+        startConnection();
+    });
+})();
+    
+    
+    
+    
